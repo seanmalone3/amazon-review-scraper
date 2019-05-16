@@ -30,7 +30,7 @@ class Scrape:
     def count_reviews(self, html=None):
         if html is None:
             html = self.get_html(page=1)
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html,"lxml")
         return int(soup.find("span", {"data-hook": "total-review-count"}).text.replace(',', ''))
 
     def get_pages(self, num_reviews=None):
@@ -42,7 +42,7 @@ class Scrape:
     def get_page_reviews(self, html=None):
         if html is None:
             html = self.get_html()
-        soup = BeautifulSoup(html)
+        soup = BeautifulSoup(html,"lxml")
         review_div = "a-section review aok-relative"
         mydivs = soup.findAll("div", {"class": review_div})
 
